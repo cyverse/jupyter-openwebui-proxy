@@ -23,8 +23,7 @@ def setup_openwebui():
         # 'new_browser_tab': True,
         'launcher_entry': {
             'enabled': True,
-            'port': 8888,
-            'base_url': '/lab',
+            "absolute_url": False,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),
             'title': 'Open WebUI',
         },

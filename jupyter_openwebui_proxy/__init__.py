@@ -12,7 +12,7 @@ def setup_openwebui():
     """
 
     # create command
-    cmd = ["nohup","open-webui","serve", "&"]
+    cmd = ["bash", "-c", "\"nohup open-webui serve &\""]
     logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {

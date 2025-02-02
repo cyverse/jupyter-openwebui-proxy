@@ -12,7 +12,7 @@ def setup_openwebui():
     """
 
     # create command
-    cmd = ["open-webui","serve"]
+    cmd = ["nohup","open-webui","serve"]
 
     return {
         # 'environment': {

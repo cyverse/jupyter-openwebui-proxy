@@ -33,7 +33,7 @@ def setup_openwebui():
     bash_cmd = "/usr/bin/bash -c \"{} serve\" &".format(openwebui_bin)
     logger.info('bash cmd: ' + ' '.join(bash_cmd))
 
-    cmd = [openwebui_bin, "serve"]
+    cmd = ["/usr/bin/nohup", openwebui_bin, "serve"]
     logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {

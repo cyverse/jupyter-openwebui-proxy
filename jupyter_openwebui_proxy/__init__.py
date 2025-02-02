@@ -19,8 +19,8 @@ def setup_openwebui():
         #     'SOME_ENV_VAR': 'somevalue',
         # },
         'command': cmd,
-        'timeout': 10,
-        'new_browser_tab': True,
+        'timeout': 20,
+        # 'new_browser_tab': True,
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons/openwebui.svg'),

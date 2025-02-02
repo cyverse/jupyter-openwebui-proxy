@@ -7,7 +7,7 @@ with open(path.join(HERE, 'README.md'), 'r', encoding = 'utf-8') as fh:
 
 version='0.0.1'
 setup(
-    name = 'cyverse-jupyter-openwebui-proxy',
+    name = 'jupyter-openwebui-proxy',
     version = version,
     packages = find_packages(),
 
@@ -33,6 +33,9 @@ setup(
         'jupyter_serverproxy_servers': [
             'openwebui = jupyter_openwebui_proxy:setup_openwebui',
         ]
+    },
+    package_data={
+        "jupyter_openwebui_proxy": ["icons/openwebui.svg"],
     },
     python_requires = '>=3.6',
     install_requires=[

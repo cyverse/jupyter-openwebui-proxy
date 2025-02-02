@@ -23,7 +23,7 @@ def setup_openwebui():
         # 'new_browser_tab': True,
         'launcher_entry': {
             'enabled': True,
-            'icon_path': os.path.join(HERE, 'icons/openwebui.svg'),
+            'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),
             'title': 'Open WebUI',
         },
         'progressive': True,

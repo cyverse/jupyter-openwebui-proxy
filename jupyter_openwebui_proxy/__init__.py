@@ -19,7 +19,6 @@ def setup_openwebui():
         #     'SOME_ENV_VAR': 'somevalue',
         # },
         'command': cmd,
-        'port': 8888,
         'timeout': 20,
         # 'new_browser_tab': True,
         'launcher_entry': {

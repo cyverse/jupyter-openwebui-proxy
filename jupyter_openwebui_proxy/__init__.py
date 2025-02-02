@@ -12,7 +12,8 @@ def setup_openwebui():
     """
 
     # create command
-    cmd = ["nohup","open-webui","serve"]
+    cmd = ["nohup","open-webui","serve", "&"]
+    logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {
         # 'environment': {

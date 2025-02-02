@@ -6,13 +6,34 @@ logger.setLevel('INFO')
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
+def get_openwebui_bin(prog):
+    from shutil import which
+
+    # Find prog in known locations
+    other_paths = [
+        os.path.join('/opt/conda/bin', prog),
+    ]
+
+    for op in other_paths:
+        if os.path.exists(op):
+            return op
+
+    raise FileNotFoundError(f'Could not find {prog} in PATH')
+
+
 def setup_openwebui():
     """ Setup commands and and return a dictionary compatible
         with jupyter-server-proxy.
     """
 
     # create command
-    cmd = ["bash", "-c", "\"nohup open-webui serve &\""]
+    openwebui_bin = get_openwebui_bin('open-webui')
+    logger.info('open-webui path: ' + ' '.join(openwebui_bin))
+
+    nohup_cmd = "\"/usr/bin/nohup {} serve &\"".format(openwebui_bin)
+    logger.info('nohup cmd: ' + ' '.join(nohup_cmd))
+
+    cmd = ["bash", "-c", nohup_cmd]
     logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {

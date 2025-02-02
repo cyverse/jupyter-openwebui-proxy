@@ -30,10 +30,10 @@ def setup_openwebui():
     openwebui_bin = get_openwebui_bin('open-webui')
     logger.info('open-webui path: ' + ' '.join(openwebui_bin))
 
-    nohup_cmd = "\"/usr/bin/nohup {} serve &\"".format(openwebui_bin)
-    logger.info('nohup cmd: ' + ' '.join(nohup_cmd))
+    bash_cmd = "/usr/bin/bash -c \"{} serve\" &".format(openwebui_bin)
+    logger.info('bash cmd: ' + ' '.join(bash_cmd))
 
-    cmd = ["bash", "-c", nohup_cmd]
+    cmd = ["/usr/bin/nohup", bash_cmd]
     logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {

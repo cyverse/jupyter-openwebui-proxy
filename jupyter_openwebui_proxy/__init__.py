@@ -31,18 +31,19 @@ def rewrite_paths(response):
 
     # print(response.body, file=sys.stderr)
 
+    response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+    response.body = response.body.replace(b'/api/', b'/openwebui/api/')
+    response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
+    response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
+    response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
+    response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
+    response.body = response.body.replace(b'/static/', b'/openwebui/static/')
+
     for header, v in response.headers.get_all():
         if header == "Content-Type":
-            logger.info('rewrite_paths() Content-Type: ' + v)
+            print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
         if header == "Location":
-            logger.info('rewrite_paths() Location: ' + v)
-            response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
-            response.body = response.body.replace(b'/api/', b'/openwebui/api/')
-            response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
-            response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
-            response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
-            response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
-            response.body = response.body.replace(b'/static/', b'/openwebui/static/')
+            print('rewrite_paths() Location: ' + v, file=sys.stderr)
 
     #         u = urlparse(v)
     #         if u.netloc != request.host:

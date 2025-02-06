@@ -66,8 +66,11 @@ def setup_openwebui():
         'command': cmd,
         'timeout': 30,
         'port': 8080,
-        "absolute_url": False,
+        'absolute_url': False,
         # 'rewrite_response': rewrite_paths,
+        'mappath': {
+            '/static/': '/openwebui/static/'
+        },
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),

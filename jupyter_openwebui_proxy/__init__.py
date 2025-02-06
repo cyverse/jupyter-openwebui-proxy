@@ -28,10 +28,10 @@ def rewrite_paths(response):
     '''
     logger.info('rewrite_paths() start')
 
-    response.body = response.body.replace(b'/_app/immutable/', b'/openwebui/_app/immutable/')
-    response.body = response.body.replace(b'/favicon/', b'/openwebui/static/')
-    response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
-    response.body = response.body.replace(b'/static/', b'/openwebui/static/')
+    # response.body = response.body.replace(b'/_app/immutable/', b'/openwebui/_app/immutable/')
+    # response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
+    # response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
+    # response.body = response.body.replace(b'/static/', b'/openwebui/static/')
 
     # for header, v in response.headers.get_all():
     #     if header == "Location":

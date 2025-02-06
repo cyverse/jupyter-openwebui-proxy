@@ -26,12 +26,12 @@ def rewrite_paths(response):
        open-webui doesn't support changing its base url. So, we'll need to rewrite paths
        in the extension itself
     '''
-    logger.info('rewrite_paths() start')
+    print('rewrite_paths() start')
 
     response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
-    response.body = response.body.replace(b'/api/', b'/openwebui/api/')
-    response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
-    response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
+    # response.body = response.body.replace(b'/api/', b'/openwebui/api/')
+    # response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
+    # response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
     response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
     response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
     response.body = response.body.replace(b'/static/', b'/openwebui/static/')
@@ -48,7 +48,7 @@ def rewrite_paths(response):
     #             # Visit the correct page
     #             response.headers[header] = request.uri + v
 
-    logger.info('rewrite_paths() end')
+    print('rewrite_paths() end')
 
 def setup_openwebui():
     """ Setup commands and and return a dictionary compatible
@@ -71,7 +71,6 @@ def setup_openwebui():
         'port': 8080,
         'absolute_url': True,
         'rewrite_response': rewrite_paths,
-        'raw_socket_proxy': True,
         'mappath': {
             '/_app/': '/openwebui/_app/',
             '/api/': '/openwebui/api/',

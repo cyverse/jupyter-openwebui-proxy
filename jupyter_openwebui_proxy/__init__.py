@@ -66,7 +66,7 @@ def setup_openwebui():
         'command': cmd,
         'timeout': 30,
         'port': 8080,
-        "absolute_url": True,
+        "absolute_url": False,
         # 'rewrite_response': rewrite_paths,
         'launcher_entry': {
             'enabled': True,

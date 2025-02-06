@@ -36,6 +36,8 @@ def rewrite_paths(response, request):
             print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
             # only replace in text/html, text/javascript, etc
             if "text" in v or "json" in v:
+                print('rewrite_paths()     performing rewrite ', file=sys.stderr)
+
                 response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
                 response.body = response.body.replace(b'/api/', b'/openwebui/api/')
                 response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
@@ -45,8 +47,8 @@ def rewrite_paths(response, request):
                 response.body = response.body.replace(b'/static/', b'/openwebui/static/')
 
         if header =="Location":
+            print('rewrite_paths() Location: here', file=sys.stderr)
             u = urlparse(v)
-            print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
             if u.netloc is not None:
                 print('     netloc: ' + u.netloc, file=sys.stderr)
             if u.path is not None:

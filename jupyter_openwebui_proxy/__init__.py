@@ -71,6 +71,7 @@ def setup_openwebui():
         'port': 8080,
         'absolute_url': True,
         'rewrite_response': rewrite_paths,
+        'raw_socket_proxy': True,
         'mappath': {
             '/_app/': '/openwebui/_app/',
             '/api/': '/openwebui/api/',

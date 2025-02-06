@@ -36,7 +36,6 @@ def rewrite_paths(response, request):
             u = urlparse(v)
             print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
             print('     netloc: ' + u.netloc, file=sys.stderr)
-            print('     http: ' + u.http, file=sys.stderr)
             print('     path: ' + u.path, file=sys.stderr)
             print('     hostname: ' + u.hostname, file=sys.stderr)
             print('     request hostname: ' + request.host, file=sys.stderr)

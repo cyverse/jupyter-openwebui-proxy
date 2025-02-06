@@ -1,6 +1,7 @@
 import os
 import logging
 from urllib.parse import urlparse, urlunparse
+import sys
 
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
@@ -26,10 +27,10 @@ def rewrite_paths(response):
        open-webui doesn't support changing its base url. So, we'll need to rewrite paths
        in the extension itself
     '''
-    print('rewrite_paths() start')
+    print('rewrite_paths() start', file=sys.stderr)
 
     response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
-    # response.body = response.body.replace(b'/api/', b'/openwebui/api/')
+    response.body = response.body.replace(b'/api/', b'/openwebui/api/')
     # response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
     # response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
     response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
@@ -48,7 +49,7 @@ def rewrite_paths(response):
     #             # Visit the correct page
     #             response.headers[header] = request.uri + v
 
-    print('rewrite_paths() end')
+    print('rewrite_paths() end', file=sys.stderr)
 
 def setup_openwebui():
     """ Setup commands and and return a dictionary compatible
@@ -74,8 +75,8 @@ def setup_openwebui():
         'mappath': {
             '/_app/': '/openwebui/_app/',
             '/api/': '/openwebui/api/',
-            '/auth/': '/openwebui/auth/',
-            '/assets/': '/openwebui/assets/',
+            # '/auth/': '/openwebui/auth/',
+            # '/assets/': '/openwebui/assets/',
             '/static/': '/openwebui/static/',
             '/favicon/': '/openwebui/favicon/',
             '/opensearch.xml': '/openwebui/opensearch.xml'

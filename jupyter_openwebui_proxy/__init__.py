@@ -75,7 +75,7 @@ def setup_openwebui():
         'timeout': 30,
         'port': 8080,
         "absolute_url": True,
-        'rewrite_response': rewrite_paths,
+        'rewrite_response': [rewrite_paths],
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),

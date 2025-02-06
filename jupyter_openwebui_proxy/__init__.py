@@ -35,10 +35,14 @@ def rewrite_paths(response, request):
         if header == "Content-Type":
             u = urlparse(v)
             print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
-            print('     netloc: ' + u.netloc or '', file=sys.stderr)
-            print('     path: ' + u.path or '', file=sys.stderr)
-            print('     hostname: ' + u.hostname or '', file=sys.stderr)
-            print('     request host: ' + request.host or '', file=sys.stderr)
+            if u.netloc is not None:
+                print('     netloc: ' + u.netloc or '', file=sys.stderr)
+            if u.path is not None:
+                print('     path: ' + u.path or '', file=sys.stderr)
+            if u.hostname is not None:
+                print('     hostname: ' + u.hostname, file=sys.stderr)
+            if request.host is not None:
+                print('     request host: ' + request.host, file=sys.stderr)
 
             # only replace in text/html, text/javascript, etc
             if "text" in v or "json" in v:

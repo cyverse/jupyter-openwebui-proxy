@@ -21,24 +21,27 @@ def get_openwebui_bin(prog):
 
     raise FileNotFoundError(f'Could not find {prog} in PATH')
 
-def rewrite_paths(response, request):
+def rewrite_paths(response):
     '''
        open-webui doesn't support changing its base url. So, we'll need to rewrite paths
        in the extension itself
     '''
     logger.info('rewrite_paths() start')
 
-    for header, v in response.headers.get_all():
-        if header == "Location":
-            logger.info('rewrite_paths() Location: ' + v)
-            u = urlparse(v)
-            if u.netloc != request.host:
-                response.headers[header] = urlunparse(u._replace(netloc=request.host))
+    response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+    response.body = response.body.replace(b'/static/', b'/openwebui/static/')
+
+    # for header, v in response.headers.get_all():
+    #     if header == "Location":
+    #         logger.info('rewrite_paths() Location: ' + v)
+    #         u = urlparse(v)
+    #         if u.netloc != request.host:
+    #             response.headers[header] = urlunparse(u._replace(netloc=request.host))
 
 
-            if v.startswith("/_app") or v.startswith("/static"):
-                # Visit the correct page
-                response.headers[header] = request.uri + v
+    #         if v.startswith("/_app") or v.startswith("/static"):
+    #             # Visit the correct page
+    #             response.headers[header] = request.uri + v
 
     logger.info('rewrite_paths() end')
 

@@ -20,6 +20,16 @@ def get_openwebui_bin(prog):
 
     raise FileNotFoundError(f'Could not find {prog} in PATH')
 
+def rewrite_paths(response, request):
+    '''
+       open-webui doesn't support changing its base url. So, we'll need to rewrite paths
+       in the extension itself
+    '''
+    for header, v in response.headers.get_all():
+        if header == "Location" and (v.startswith("/_app") or v.startswith("/static")):
+            # Visit the correct page
+            response.headers[header] = request.uri + v
+
 
 def setup_openwebui():
     """ Setup commands and and return a dictionary compatible
@@ -41,12 +51,14 @@ def setup_openwebui():
         #     'SOME_ENV_VAR': 'somevalue',
         # },
         'command': cmd,
-        'timeout': 20,
+        'timeout': 30,
+        'port': 8080,
+        "absolute_url": True,
         # 'new_browser_tab': True,
         'launcher_entry': {
             'enabled': True,
-            "absolute_url": False,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),
+            'rewrite_response': rewrite_paths,
             'title': 'Open WebUI',
         },
         'progressive': True,

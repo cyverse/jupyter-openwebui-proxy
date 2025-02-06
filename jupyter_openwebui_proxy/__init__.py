@@ -22,7 +22,7 @@ def get_openwebui_bin(prog):
 
     raise FileNotFoundError(f'Could not find {prog} in PATH')
 
-def rewrite_paths(response):
+def rewrite_paths(response, request):
     '''
        open-webui doesn't support changing its base url. So, we'll need to rewrite paths
        in the extension itself
@@ -32,19 +32,25 @@ def rewrite_paths(response):
     # print(response.body, file=sys.stderr)
 
     for header, v in response.headers.get_all():
-        # if header == "Content-Type":
-        #     print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
-        #     # only replace in text/html, text/javascript, etc
-        #     if "text" in v or "json" in v:
-        #         response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
-        #         response.body = response.body.replace(b'/api/', b'/openwebui/api/')
-        #         response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
-        #         response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
-        #         response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
-        #         response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
-        #         response.body = response.body.replace(b'/static/', b'/openwebui/static/')
-        if header == "Location":
-            print('rewrite_paths() Location: ' + v, file=sys.stderr)
+        if header == "Content-Type":
+            u = urlparse(v)
+            print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
+            print('     netloc: ' + u.netloc, file=sys.stderr)
+            print('     http: ' + u.http, file=sys.stderr)
+            print('     path: ' + u.path, file=sys.stderr)
+            print('     hostname: ' + u.hostname, file=sys.stderr)
+            print('     request hostname: ' + request.host, file=sys.stderr)
+
+            # only replace in text/html, text/javascript, etc
+            if "text" in v or "json" in v:
+                response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+                response.body = response.body.replace(b'/api/', b'/openwebui/api/')
+                response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
+                response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
+                response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
+                response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
+                response.body = response.body.replace(b'/static/', b'/openwebui/static/')
+
 
     #         u = urlparse(v)
     #         if u.netloc != request.host:

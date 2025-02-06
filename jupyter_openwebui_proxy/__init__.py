@@ -1,5 +1,6 @@
 import os
 import logging
+from urllib.parse import urlparse, urlunparse
 
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
@@ -30,10 +31,14 @@ def rewrite_paths(response, request):
     for header, v in response.headers.get_all():
         if header == "Location":
             logger.info('rewrite_paths() Location: ' + v)
+            u = urlparse(v)
+            if u.netloc != request.host:
+                response.headers[header] = urlunparse(u._replace(netloc=request.host))
 
-        if header == "Location" and (v.startswith("/_app") or v.startswith("/static")):
-            # Visit the correct page
-            response.headers[header] = request.uri + v
+
+            if v.startswith("/_app") or v.startswith("/static"):
+                # Visit the correct page
+                response.headers[header] = request.uri + v
 
     logger.info('rewrite_paths() end')
 
@@ -57,7 +62,7 @@ def setup_openwebui():
         'timeout': 30,
         'port': 8080,
         "absolute_url": True,
-        'rewrite_response': [rewrite_paths],
+        'rewrite_response': rewrite_paths,
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),

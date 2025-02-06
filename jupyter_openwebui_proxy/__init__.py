@@ -46,6 +46,8 @@ def rewrite_paths(response, request):
                 response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
                 response.body = response.body.replace(b'/static/', b'/openwebui/static/')
 
+                print('reponse.body ' + response.body, file=sys.stderr)
+
         if header =="Location":
             print('rewrite_paths() Location: here', file=sys.stderr)
             u = urlparse(v)

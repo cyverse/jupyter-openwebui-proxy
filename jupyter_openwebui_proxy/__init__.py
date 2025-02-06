@@ -73,16 +73,16 @@ def setup_openwebui():
         'timeout': 30,
         'port': 8080,
         'absolute_url': False,
-        # 'rewrite_response': rewrite_paths,
-        'mappath': {
-            '/_app/': '/openwebui/_app/',
-            '/api/': '/openwebui/api/',
-            '/auth/': '/openwebui/auth/',
-            '/assets/': '/openwebui/assets/',
-            '/static/': '/openwebui/static/',
-            '/favicon/': '/openwebui/favicon/',
-            '/opensearch.xml': '/openwebui/opensearch.xml'
-        },
+        'rewrite_response': rewrite_paths,
+        # 'mappath': {
+        #     '/_app/': '/openwebui/_app/',
+        #     '/api/': '/openwebui/api/',
+        #     '/auth/': '/openwebui/auth/',
+        #     '/assets/': '/openwebui/assets/',
+        #     '/static/': '/openwebui/static/',
+        #     '/favicon/': '/openwebui/favicon/',
+        #     '/opensearch.xml': '/openwebui/opensearch.xml'
+        # },
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),

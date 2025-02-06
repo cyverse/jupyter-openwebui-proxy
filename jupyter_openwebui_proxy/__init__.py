@@ -2,7 +2,7 @@ import os
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel('INFO')
+logger.setLevel('DEBUG')
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,6 +34,7 @@ def rewrite_paths(response, request):
         if header == "Location" and (v.startswith("/_app") or v.startswith("/static")):
             # Visit the correct page
             response.headers[header] = request.uri + v
+
     logger.info('rewrite_paths() end')
 
 

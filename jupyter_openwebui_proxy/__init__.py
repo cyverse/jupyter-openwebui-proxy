@@ -33,6 +33,7 @@ def rewrite_paths(response, request):
 
     for header, v in response.headers.get_all():
         if header == "Content-Type":
+            print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
             # only replace in text/html, text/javascript, etc
             if "text" in v or "json" in v:
                 response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')

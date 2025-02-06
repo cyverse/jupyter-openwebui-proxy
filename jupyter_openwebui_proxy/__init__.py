@@ -29,6 +29,7 @@ def rewrite_paths(response):
     logger.info('rewrite_paths() start')
 
     response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+    response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
     response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
     response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
     response.body = response.body.replace(b'/static/', b'/openwebui/static/')
@@ -70,8 +71,9 @@ def setup_openwebui():
         'rewrite_response': rewrite_paths,
         'mappath': {
             '/_app/': '/openwebui/_app/',
+            '/assets/': '/openwebui/assets/',
             '/static/': '/openwebui/static/',
-            '/favicon/': '/openwebui/static/',
+            '/favicon/': '/openwebui/favicon/',
             '/opensearch.xml': '/openwebui/opensearch.xml'
         },
         'launcher_entry': {

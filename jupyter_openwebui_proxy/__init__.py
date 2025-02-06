@@ -53,19 +53,15 @@ def setup_openwebui():
     logger.info('open-webui command: ' + ' '.join(cmd))
 
     return {
-        # 'environment': {
-        #     'SOME_ENV_VAR': 'somevalue',
-        # },
         'command': cmd,
         'timeout': 30,
         'port': 8080,
         "absolute_url": True,
-        # 'new_browser_tab': True,
         'rewrite_response': rewrite_paths,
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),
             'title': 'Open WebUI',
         },
-        'progressive': True,
+        # 'progressive': True,
     }

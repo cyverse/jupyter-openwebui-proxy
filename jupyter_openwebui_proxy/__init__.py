@@ -31,7 +31,6 @@ def rewrite_paths(response):
 
     # print(response.body, file=sys.stderr)
 
-
     for header, v in response.headers.get_all():
         if header == "Content-Type":
             print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)

@@ -28,8 +28,8 @@ def rewrite_paths(response):
     '''
     logger.info('rewrite_paths() start')
 
-    response.body = response.body.replace('/_app/', '/openwebui/_app/')
-    response.body = response.body.replace('/static/', '/openwebui/static/')
+    response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+    response.body = response.body.replace(b'/static/', b'/openwebui/static/')
 
     # for header, v in response.headers.get_all():
     #     if header == "Location":

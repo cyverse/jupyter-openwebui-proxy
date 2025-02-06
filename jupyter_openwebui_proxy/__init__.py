@@ -61,10 +61,10 @@ def setup_openwebui():
         'port': 8080,
         "absolute_url": True,
         # 'new_browser_tab': True,
+        'rewrite_response': rewrite_paths,
         'launcher_entry': {
             'enabled': True,
             'icon_path': os.path.join(HERE, 'icons', 'openwebui.svg'),
-            'rewrite_response': rewrite_paths,
             'title': 'Open WebUI',
         },
         'progressive': True,

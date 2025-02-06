@@ -69,7 +69,7 @@ def setup_openwebui():
         'command': cmd,
         'timeout': 30,
         'port': 8080,
-        'absolute_url': False,
+        'absolute_url': True,
         'rewrite_response': rewrite_paths,
         'mappath': {
             '/_app/': '/openwebui/_app/',

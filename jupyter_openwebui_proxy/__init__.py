@@ -31,17 +31,19 @@ def rewrite_paths(response):
 
     # print(response.body, file=sys.stderr)
 
-    response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
-    response.body = response.body.replace(b'/api/', b'/openwebui/api/')
-    response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
-    response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
-    response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
-    response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
-    response.body = response.body.replace(b'/static/', b'/openwebui/static/')
 
     for header, v in response.headers.get_all():
         if header == "Content-Type":
             print('rewrite_paths() Content-Type: ' + v, file=sys.stderr)
+            # only replace in text/html, text/javascript, etc
+            if "text" in v or "json" in v:
+                response.body = response.body.replace(b'/_app/', b'/openwebui/_app/')
+                response.body = response.body.replace(b'/api/', b'/openwebui/api/')
+                response.body = response.body.replace(b'/auth/', b'/openwebui/auth/')
+                response.body = response.body.replace(b'/assets/', b'/openwebui/assets/')
+                response.body = response.body.replace(b'/favicon/', b'/openwebui/favicon/')
+                response.body = response.body.replace(b'/opensearch.xml', b'/openwebui/opensearch.xml')
+                response.body = response.body.replace(b'/static/', b'/openwebui/static/')
         if header == "Location":
             print('rewrite_paths() Location: ' + v, file=sys.stderr)
 

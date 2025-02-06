@@ -37,24 +37,6 @@ def rewrite_paths(response, request):
 
     logger.info('rewrite_paths() end')
 
-def rewrite_paths(response):
-    '''
-       open-webui doesn't support changing its base url. So, we'll need to rewrite paths
-       in the extension itself
-    '''
-    logger.info('rewrite_paths() start')
-
-    for header, v in response.headers.get_all():
-        if header == "Location":
-            logger.info('rewrite_paths() Location: ' + v)
-
-        # if header == "Location" and (v.startswith("/_app") or v.startswith("/static")):
-        #     # Visit the correct page
-        #     response.headers[header] = request.uri + v
-
-    logger.info('rewrite_paths() end')
-
-
 def setup_openwebui():
     """ Setup commands and and return a dictionary compatible
         with jupyter-server-proxy.
